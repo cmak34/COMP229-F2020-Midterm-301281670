@@ -1,7 +1,13 @@
+/**
+ * File name: routes/books.js
+ * Author's name: Chung Ping Mak
+ * StudentID: 301281670
+ * Web App name: COMP229-F2020-MidTerm
+ */
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
-let mongoose = require('mongoose');
 
 // define the book model
 let book = require('../models/books');
@@ -43,15 +49,13 @@ router.get('/add', (req, res, next) => {
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
-  
   let newBook = book({
     "Title": req.body.Title,
     "Description": req.body.Description,
-    "Price": (req.body.Price),
+    "Price": (isNum(req.body.Price)) ? parseInt(req.body.Price) : 0,
     "Author": req.body.Author,
     "Genre": req.body.Genre
   });
-  console.log(newBook)
   book.create(newBook, (err, Book) => {
       if (err) {
           console.log(err);
@@ -66,38 +70,39 @@ router.post('/add', (req, res, next) => {
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
   let id = req.params.id;
+  console.log(id)
   book.findById(id, (err, bookToEdit) => {
       if (err) {
           console.log(err);
           res.end(err);
       }
       else {
-          res.render('book/details', { 
-            title: 'Edit Book', 
-            book: bookToEdit, 
-            displayName:req.user?req.user.displayName:''
-          });
+        res.render('books/details', {
+          title: 'Books',
+          books: bookToEdit
+        });
       }
   });
 });
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
+  let id = req.params.id;
   let updatedBook = book({
-      "_id": id,
+      _id: id,
       "Title": req.body.Title,
       "Description": req.body.Description,
-      "Price": req.body.Price,
+      "Price": (isNum(req.body.Price)) ? parseInt(req.body.Price) : 0,
       "Author": req.body.Author,
       "Genre": req.body.Genre
   });
-  book.updateOne({ _id: id }, updatedBook, (err) => {
+  console.log(updatedBook)
+  book.findOneAndUpdate({ _id: id }, updatedBook, (err) => {
       if (err) {
           console.log(err);
           res.end(err);
       }
       else {
-          //console.log(bookList);
           res.redirect('/books');
       }
   });

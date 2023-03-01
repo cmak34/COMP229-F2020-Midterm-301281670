@@ -1,3 +1,10 @@
+/**
+ * File name: routes/server.js
+ * Author's name: Chung Ping Mak
+ * StudentID: 301281670
+ * Web App name: COMP229-F2020-MidTerm
+ */
+
 let app = require('./server/config/app');
 let debug = require('debug')('comp308-w2019-midterm:server');
 let http = require('http');

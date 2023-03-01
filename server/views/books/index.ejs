@@ -30,17 +30,15 @@
                   <td class="text-center">$<%= books[index].Price %></td>
                   <td class="text-center"><%= books[index].Author %></td>
                   <td class="text-center"><%= books[index].Genre %></td>
-
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the EDIT BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <a href="/books/<%= books[index].id %>" class="btn btn-primary">
+                      <i class="fa fa-pencil"></i> Edit
+                    </a>
                   </td>
-
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the DELETE BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <a href="/books/delete/<%= books[index].id %>" class="btn btn-danger">
+                      <i class="fa fa-times"></i> Delete
+                    </a>
                   </td>
                 </tr>
                 <% } %>

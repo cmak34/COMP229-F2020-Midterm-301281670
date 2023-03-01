@@ -1,3 +1,10 @@
+/**
+ * File name: app.js
+ * Author's name: Chung Ping Mak
+ * StudentID: 301281670
+ * Web App name: COMP229-F2020-MidTerm
+ */
+
 // moddules for node and express
 let createError = require('http-errors');
 let express = require('express');
