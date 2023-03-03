@@ -70,7 +70,6 @@ router.post('/add', (req, res, next) => {
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
   let id = req.params.id;
-  console.log(id)
   book.findById(id, (err, bookToEdit) => {
       if (err) {
           console.log(err);
@@ -96,7 +95,6 @@ router.post('/:id', (req, res, next) => {
       "Author": req.body.Author,
       "Genre": req.body.Genre
   });
-  console.log(updatedBook)
   book.findOneAndUpdate({ _id: id }, updatedBook, (err) => {
       if (err) {
           console.log(err);
